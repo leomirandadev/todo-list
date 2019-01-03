@@ -98,15 +98,15 @@ class Task{
 	 *
 	 * @return void
 	 */
-	public function getById() {
+	public function getById($id) {
 		if ( 
-			!isset($this->id) && empty($this->id)
+			!isset($id) && empty($id)
 		) {
 			$lastError = "ID da task não foi informado";
 			return false;
 		}
 
-		$this->condition = array( "id" => $this->id );
+		$this->condition = array( "id" => $id );
 				
 		$task = $this->GetBy();
 
@@ -125,9 +125,9 @@ class Task{
 	 *
 	 * @return void
 	 */
-	public function change() {
+	public function change($id) {
 		if(
-			!isset($this->id) && empty($this->id) &&
+			!isset($id) && empty($id) &&
 			!isset($this->title) && empty($this->title) &&
 			!isset($this->description)
 		){
@@ -145,7 +145,8 @@ class Task{
 			"description" => $this->description,
 			"id_status" => $this->id_status
 		);
-
+		
+		$this->condition = array( "id" => $id );
 		$udapted = $this->Update();
 
 		if(!$udapted){
@@ -161,9 +162,9 @@ class Task{
 	 *
 	 * @return void
 	 */
-	public function finish() {
+	public function finish($id) {
 		if ( 
-			!isset($this->id) && empty($this->id)
+			!isset($id) && empty($id)
 		) {
 			$lastError = "ID da task não foi informado";
 			return false;
@@ -172,7 +173,8 @@ class Task{
 		$this->finished_on = $this->getTodayDate();
 		$this->id_status = 2;
 		$this->data = array( "finished_on" => $this->finished_on, "id_status" => $this->id_status );
-
+		
+		$this->condition = array( "id" => $id );
 		$udapted = $this->Update();
 
 		if(!$udapted){
@@ -189,9 +191,9 @@ class Task{
 	 *
 	 * @return void
 	 */
-	public function notFinish() {
+	public function restart($id) {
 		if ( 
-			!isset($this->id) && empty($this->id)
+			!isset($id) && empty($id)
 		) {
 			$lastError = "ID da task não foi informado";
 			return false;
@@ -199,7 +201,8 @@ class Task{
 
 		$this->id_status = 1;
 		$this->data = array( "finished_on" => null, "id_status" => $this->id_status );
-
+		
+		$this->condition = array( "id" => $id );
 		$udapted = $this->Update();
 
 		if(!$udapted){
@@ -216,15 +219,16 @@ class Task{
 	 *
 	 * @return void
 	 */
-	public function remove() {
-		if ( !isset($this->id) && empty($this->id) ) {
+	public function remove($id) {
+		if ( !isset($id) && empty($id) ) {
 			$lastError = "ID da task não foi informado";
 			return false;
 		}
 
 		$this->removed_on = $this->getTodayDate();
 		$this->data = array( "removed_on" => $this->removed_on );
-
+		
+		$this->condition = array( "id" => $id );
 		$udapted = $this->Update();
 
 		if(!$udapted){

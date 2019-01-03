@@ -6,6 +6,7 @@
 
     //routes
     include 'routes/user.php';
+    include 'routes/task.php';
 
     //run API
     $app->run();
