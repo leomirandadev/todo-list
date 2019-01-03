@@ -10,11 +10,11 @@
  */
 
 namespace Models;
-use DataManager\DataCenter;
+use DataManager\DataCenter, utf8Converter\utf8Converter;
 
 class Task{
 
-	use DataCenter;
+	use DataCenter, utf8Converter;
 	
 	public $id_user;
 	public $title;
@@ -25,6 +25,8 @@ class Task{
 	public $finished_on;
 	// last error from functions
 	public $lastError = "";
+	// output from functions
+	public $output = "";
 
 	function __construct() {
 		// set table from DataBase
@@ -107,10 +109,11 @@ class Task{
 			"id_user" => $this->id_user
 		);
 				
-		$task = $this->GetBy();
+		$tasks = $this->GetBy();
 
-		if ( !$task ) return false;
-		return $this->utf8_converter( $task[0] );
+		if ( !$tasks ) return false;
+		$this->output = $this->utf8_converter( $tasks );
+		return true;
 	}
 
 
@@ -132,7 +135,8 @@ class Task{
 		$task = $this->GetBy();
 
 		if ( !$task ) return false;
-		return $this->utf8_converter( $task[0] );
+		$this->output = $this->utf8_converter( $task[0] );
+		return true;
 	}
 
 

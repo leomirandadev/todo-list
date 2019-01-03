@@ -42,9 +42,9 @@ $app->get('/task/{id}', function (Request $request, Response $response, array $a
     }
     $task = new Task();
     // try getById
-	$result = $task->getById($id);
+	$result = $task->getById($args['id']);
     
-    return json_encode( array( "ok" => $result, "error" => $task->lastError ) );
+    return json_encode( array( "ok" => $result, "error" => $task->lastError, 'output' => $task->output ) );
 });
 
 $app->get('/task/user/{id_user}/status/{id_status}', function (Request $request, Response $response, array $args) {
@@ -62,7 +62,7 @@ $app->get('/task/user/{id_user}/status/{id_status}', function (Request $request,
     // try getAll
 	$result = $task->getByStatus();
     
-    return json_encode( array( "ok" => $result, "error" => $task->lastError ) );
+    return json_encode( array( "ok" => $result, "error" => $task->lastError, 'output' => $task->output ) );
 });
 
 //========================================================================================================
