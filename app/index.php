@@ -12,6 +12,9 @@
 			case 'home':
 				$page = new login();
 			break;
+			default:
+				$page = new login();
+			break;
 		}
 	else:
 		$page = new login();
