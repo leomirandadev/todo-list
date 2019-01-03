@@ -1,4 +1,7 @@
 {
+  "confirm_remove_task":"Deseja remover esta task?",
+  "confirm_finish_task":"Deseja concluir esta task?",
+  "confirm_restart_task":"Deseja ativar esta task?",
   "error_system":"Ops! Algo de errado não esta certo. ",
   "error_login":" E-mail ou senha incorretos! Tente novamente.",
   "finished_task_title":"Tarefas Concluídas",

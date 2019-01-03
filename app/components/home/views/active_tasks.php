@@ -18,13 +18,13 @@ if ( $this->active_tasks !== false ):
         </div>
 
         <div class="col-sm-4 right">
-          <button class="btn btn-sm btn-success">
+          <button onclick="finishTask(<?=$task->id?>)" class="btn btn-sm btn-success">
             <i class="fas fa-check"></i>
           </button>
           <button class="btn btn-sm btn-default">
             <i class="fas fa-wrench"></i>
           </button>
-          <button class="btn btn-sm btn-danger">
+          <button onclick="removeTask(<?=$task->id?>)" class="btn btn-sm btn-danger">
             <i class="far fa-trash-alt"></i>
           </button>
         </div>

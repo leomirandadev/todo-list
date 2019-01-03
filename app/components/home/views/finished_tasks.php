@@ -18,13 +18,13 @@ if ( $this->finished_tasks !== false ):
         </div>
 
         <div class="col-sm-4 right">
-          <button class="btn btn-sm btn-info">
+          <button onclick="restartTask(<?=$task->id?>)" class="btn btn-sm btn-info">
             <i class="fas fa-undo-alt"></i>
           </button>
           <button class="btn btn-sm btn-default">
             <i class="fas fa-wrench"></i>
           </button>
-          <button class="btn btn-sm btn-danger">
+          <button onclick="removeTask(<?=$task->id?>)" class="btn btn-sm btn-danger">
             <i class="far fa-trash-alt"></i>
           </button>
         </div>

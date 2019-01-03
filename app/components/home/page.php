@@ -43,6 +43,7 @@
 
 
 
-    <?php include_once("headers/footer.php"); ?>	
+    <?php include_once("headers/footer.php"); ?>
+    <script type="text/javascript" src="components/home/views/functions_task.js"></script>
 </body>
 </html>
