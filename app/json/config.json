@@ -1,0 +1,8 @@
+{
+	"urlLogo" : "imgs/logo.png",
+	"urlLogoEmblema" : "imgs/icon-emblema.png",
+	"urlLogoIcon" : "imgs/logo-icon.png",
+	"title" : "TodoList Supero",
+	"desc" : "Desafio de programação para Empresa Supero",
+	"link_api" : "http://localhost/supero-project/api"
+}

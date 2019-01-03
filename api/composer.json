@@ -1,0 +1,13 @@
+{
+    "require": {
+        "slim/slim": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Models\\": "models/",
+            "Routers\\": "routers/",
+            "DataManager\\": "libs/dataManagerV2.1/",
+        	"utf8Converter\\": "libs/utf8ConverterV1/"
+        }
+    }
+}
