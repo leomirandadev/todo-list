@@ -1,11 +1,14 @@
 class AJAX{
+	config = "";
+	// depende do jquery
+	$.getJSON('json/config.json', function(data){config = data;});
 	enviaController(formDados,route,metodo){
 
 	 	var resultado	=	function(){
 		    var	tmp	=	null;
 			$.ajax({
 		    	async:false,
-				url:"http://localhost/supero-project/api/"+route,
+				url:config.link_api + route,
 				type:metodo,
 				data:formDados,
 				cache:false,
