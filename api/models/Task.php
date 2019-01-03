@@ -53,17 +53,14 @@ class Task{
 	 * @return void
 	 */
 	public function new() {
-		if(
-			!isset($this->title) && empty($this->title) &&
+		if( !isset($this->title) && empty($this->title) &&
 			!isset($this->id_user) && empty($this->id_user) &&
-			!isset($this->description)
-		){
-			$lastError = array( 
-				'description' => "Nao setada" ,
-				'title' => "Nao setado ou vazio" 
-			);
+			!isset($this->description) ){
+			$lastError = array( 'description' => "Nao setada" ,
+				'title' => "Nao setado ou vazio" );
 			return false;
 		}
+		
 		$this->id_status = 1; // this is Id from "ativo" on dataBase		
 		$this->data = array(
 			"title" => $this->title,
@@ -71,7 +68,6 @@ class Task{
 			"id_user" => $this->id_user,
 			"id_status" => $this->id_status
 		);
-
 		$idInserido = $this->Insert();
 
 		if(!$idInserido){
@@ -93,10 +89,8 @@ class Task{
 	 * @return void
 	 */
 	public function getByStatus() {
-		if ( 
-			!isset($this->id_status) && empty($this->id_status)&&
-			!isset($this->id_user) && empty($this->id_user)
-		) {
+		if ( !isset($this->id_status) && empty($this->id_status)&&
+			!isset($this->id_user) && empty($this->id_user)	) {
 			$lastError = array( 
 				'id_status' => "Nao setado ou vazio",
 				'id_user' => "Nao setado ou vazio"
@@ -104,11 +98,8 @@ class Task{
 			return false;
 		}
 
-		$this->condition = array( 
-			"id_status" => $this->id_status,
-			"id_user" => $this->id_user
-		);
-				
+		$this->condition = array( "id_status" => $this->id_status,
+			"id_user" => $this->id_user	);	
 		$tasks = $this->GetBy();
 
 		if ( !$tasks ) return false;
@@ -123,15 +114,12 @@ class Task{
 	 * @return void
 	 */
 	public function getById($id) {
-		if ( 
-			!isset($id) && empty($id)
-		) {
+		if ( !isset($id) && empty($id) ) {
 			$lastError = "ID da task nao foi informado";
 			return false;
 		}
 
 		$this->condition = array( "id" => $id );
-				
 		$task = $this->GetBy();
 
 		if ( !$task ) return false;
@@ -151,27 +139,18 @@ class Task{
 	 * @return void
 	 */
 	public function change($id) {
-		if(
-			!isset($id) && empty($id) &&
-			!isset($this->title) && empty($this->title) &&
-			!isset($this->description)
-		){
-			$lastError = array( 
-				'id' => "Nao setada ou vazia",
-				'description' => "Nao setada" ,
-				'title' => "Nao setado ou vazio" 
-			);
+		if(!isset($id) && empty($id) && !isset($this->title)
+			&& empty($this->title) && !isset($this->description) ) {
+			
+			$lastError = array( 'id' => "Nao setada ou vazia",
+				'description' => "Nao setada", 'title' => "Nao setado ou vazio"	);
 			return false;
 		}
 		
 		$this->id_status = 1; // this is Id from "ativo" on dataBase		
-		$this->data = array(
-			"title" => $this->title,
-			"description" => $this->description,
-			"id_status" => $this->id_status
-		);
-		
-		$this->condition = array( "id" => $id );
+		$this->data = array( "title" => $this->title, "description" => $this->description,
+			"id_status" => $this->id_status	); // data to update
+		$this->condition = array( "id" => $id ); 
 		$udapted = $this->Update();
 
 		if(!$udapted){
@@ -188,9 +167,7 @@ class Task{
 	 * @return void
 	 */
 	public function finish($id) {
-		if ( 
-			!isset($id) && empty($id)
-		) {
+		if ( !isset($id) && empty($id) ) {
 			$lastError = "ID da task nao foi informado";
 			return false;
 		}
@@ -198,15 +175,13 @@ class Task{
 		$this->finished_on = $this->getTodayDate();
 		$this->id_status = 2;
 		$this->data = array( "finished_on" => $this->finished_on, "id_status" => $this->id_status );
-		
-		$this->condition = array( "id" => $id );
+		$this->condition = array( "id" => $id ); 
 		$udapted = $this->Update();
 
 		if(!$udapted){
 			$lastError = "Ocorreu um erro ao alterar a task no banco de dados";
 			return false;	
 		}
-		
 		return true;
 	}
 	
@@ -217,16 +192,13 @@ class Task{
 	 * @return void
 	 */
 	public function restart($id) {
-		if ( 
-			!isset($id) && empty($id)
-		) {
+		if ( !isset($id) && empty($id) ) {
 			$lastError = "ID da task nao foi informado";
 			return false;
 		}
 
 		$this->id_status = 1;
 		$this->data = array( "finished_on" => null, "id_status" => $this->id_status );
-		
 		$this->condition = array( "id" => $id );
 		$udapted = $this->Update();
 
@@ -234,7 +206,6 @@ class Task{
 			$lastError = "Ocorreu um erro ao alterar a task no banco de dados";
 			return false;	
 		}
-		
 		return true;
 	}
 	
@@ -252,7 +223,6 @@ class Task{
 
 		$this->removed_on = $this->getTodayDate();
 		$this->data = array( "removed_on" => $this->removed_on );
-		
 		$this->condition = array( "id" => $id );
 		$udapted = $this->Update();
 
@@ -260,7 +230,6 @@ class Task{
 			$lastError = "Ocorreu um erro ao alterar a task no banco de dados";
 			return false;	
 		}
-		
 		return true;
 	}
 

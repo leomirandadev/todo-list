@@ -6,8 +6,7 @@ function removeTask(id){
 		content: msg.confirm_remove_task,
 		buttons: {
 			Sim: function () {
-				$.post(config.link_api+"/task/remove", {id:id},
-					function(data, status){
+				$.post(config.link_api + "/task/remove", {id:id}, function(data, status){
 						result = JSON.parse(data);
 						if (result.ok) {
 							window.location.reload();
@@ -39,8 +38,7 @@ function finishTask(id){
 		content: msg.confirm_finish_task,
 		buttons: {
 			Sim: function () {
-				$.post(config.link_api + "/task/finish", {id:id},
-					function(data, status){
+				$.post(config.link_api + "/task/finish", {id:id}, function(data, status){
 						result = JSON.parse(data);
 						if (result.ok) {
 							window.location.reload();
@@ -71,8 +69,7 @@ function restartTask(id){
 		content: msg.confirm_restart_task,
 		buttons: {
 			Sim: function () {
-				$.post(config.link_api + "/task/restart", {id:id},
-					function(data, status){
+				$.post(config.link_api + "/task/restart", {id:id}, function(data, status){
 						result = JSON.parse(data);
 						if (result.ok) {
 							window.location.reload();

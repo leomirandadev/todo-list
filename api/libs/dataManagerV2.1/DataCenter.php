@@ -65,27 +65,20 @@ trait DataCenter{
 	protected function Insert(){
 		$this->Open();
 		$conector = $this->db;
-
 		$first = 0;
 		$values = null;
 		$camps = null;
 
 		//camps to create
 		foreach ($this->data as $camp => $value) {
-
 			if($first==1){
-
 				$camps.=",";
 				$values.=",";
-
 			}
-
 			$camps .= $camp;
 			$values .= "\"".$value."\"";
 			$first=1;
-
 		}
-
 		$sql = "INSERT INTO $this->table ($camps) VALUES ($values)";
 
 		//try to insert
@@ -93,7 +86,6 @@ trait DataCenter{
 			$conector->exec($sql);
 			$this->Close();
 			return $conector->lastInsertId();
-
 		}catch (Exception $e) {
 			$this->errorDB = $e;
 			$this->Close();
@@ -110,7 +102,6 @@ trait DataCenter{
 	protected function Update(){
 		$this->Open();
 		$conector = $this->db;
-
 		$first = false;
 		$camps = null;
 
@@ -119,38 +110,23 @@ trait DataCenter{
 			//para corrigir o erro de virgula e ponto transmitido pelo foreach
 			$valueFloated = $this->isFloat($value);
 			$value = !$valueFloated ? $value : $valueFloated ;
-
-			if($first){
-
-				$camps.=",";
-
-			}
+			if ($first)	$camps.=",";
+	
 			$camps .= $camp."=\"$value\"";
 			$first = true;
-
 		}
-
 		//conditions of selection 
 		$first = false;
 		$conditions = null;
-
 		foreach ($this->condition as $camp => $value) {
-
-			if($first){
-
-				$conditions .= "AND";
-
-			}
-
+			if ($first) $conditions .= "AND";
+			
 			$first = true;
 			$conditions .= " $camp = \"$value\" ";
-
 		}
-
 		$sql = "UPDATE $this->table SET $camps WHERE $conditions ";
 		//try to update
 		return $this->TryCatch($sql,$conector);
-
 	}
 
 	
@@ -162,26 +138,17 @@ trait DataCenter{
 	protected function Delete(){
 		$this->Open();
 		$conector = $this->db;
-
 		//conditions for selection 
 		$first = false;
 		$conditions = null;
 
 		foreach ($this->condition as $camp => $value) {
-
-			if($first){
-
-				$conditions .= "AND";
-
-			}
+			if ($first) $conditions .= "AND";
 
 			$first = true;
 			$conditions .= " $camp = \"$value\" ";
-
 		}
-
 		$sql = "DELETE FROM $this->table WHERE $conditions ";
-
 		//try to delete
 		return $this->TryCatch($sql,$conector);
 	}
@@ -195,38 +162,25 @@ trait DataCenter{
 	protected function GetBy(){
 		$this->Open();
 		$conector = $this->db;
-		
 		$innerJoin = (isset($this->innerJoin)) ? "INNER JOIN ".$this->innerJoin['table']." ON $this->table.".$this->innerJoin["camps"][0]." = ".$this->innerJoin['table'].".".$this->innerJoin['camps'][1] : "";
 		$anotherCamp = (isset($this->innerJoin)) ? $this->innerJoin['table'].".*," : "";
-
 		$orderBySelected = (!empty($this->orderBy)) ? $this->orderBy : $this->table.".id";
 		//conditions for selection 
 		$first = false;
 		$conditions = null;
+
 		if($this->condition!="all"){
-
 			foreach ($this->condition as $camp => $value) {
-
-				if($first){
-
-					$conditions .= "AND";
-
-				}
+				if ($first) $conditions .= "AND";
 
 				$first = true;
 				$conditions .= " $this->table.$camp = \"$value\" ";
-
 			}
 			$sql = "SELECT $anotherCamp $this->table.* FROM $this->table $innerJoin WHERE $conditions ORDER BY $orderBySelected DESC";
-
 		}else{
-
 			$sql = "SELECT $anotherCamp $this->table.* FROM $this->table $innerJoin ORDER BY $orderBySelected DESC";
-
 		}
-
 		return $this->Pesquisa($sql,$conector);
-
 	}
 
 	
@@ -236,36 +190,24 @@ trait DataCenter{
 	 * @return void
 	 */
 	protected function GetLike(){
-
 		$this->Open();
 		$conector = $this->db;
-
 		$innerJoin = (isset($this->innerJoin)) ? "INNER JOIN ".$this->innerJoin['table']." ON $this->table.".$this->innerJoin["camps"][0]." = ".$this->innerJoin['table'].".".$this->innerJoin['camps'][1] : "";
 		//conditions for selection 
 		$first = false;
 		$conditions = null;
+
 		if($this->condition!="all"){
-
 			foreach ($this->condition as $camp => $value) {
-
-				if($first){
-
-					$conditions .= "AND";
-
-				}
+				if ($first)	$conditions .= "AND";
 
 				$first = true;
 				$conditions .= " $this->table.$camp LIKE \"%$value%\" ";
-
 			}
 			$sql = "SELECT * FROM $this->table $innerJoin WHERE $conditions ORDER BY $this->table.id DESC";
-
 		}else{
-
 			$sql = "SELECT * FROM $this->table $innerJoin ORDER BY $this->table.id DESC";
-
 		}
-
 		return $this->Pesquisa($sql,$conector);
 
 	}
@@ -287,11 +229,8 @@ trait DataCenter{
 			$this->Close();
 			return FALSE;
 		}
-
 		$dados = $pesquisaSql->fetchAll();
-		
 		$this->Close();
-
 		return $dados;
 	}
 

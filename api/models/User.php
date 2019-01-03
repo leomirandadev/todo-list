@@ -82,7 +82,6 @@ class User{
 	public function login() {
 
 		if ( !$this->emailError && !$this->passwordError ) {
-		
 			$cryptPassword =  md5( $this->password );
 			$this->condition = array( "email" => $this->email );
 			$user = $this->GetBy();
@@ -91,25 +90,20 @@ class User{
 				$this->lastError = "Usuario nao encontrado";
 				return false;
 			} 
-
 			$user = (object) $user[0];
 
 			if( $user->password != $cryptPassword ){				
 				$this->lastError = "Senha errada.";
 				return false;
 			}
-
 			session_start();
 			$_SESSION['user'] = $user->id;
-
 			return true;
 
 		}
-
 		$this->lastError = "E-mail e senha nao foram fornecidos corretamente.";
 		return false;
 	}
-
 
 }
 ?>
