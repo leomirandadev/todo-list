@@ -29,6 +29,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet"> 
 	<!-- JQuery e Bootstrap -->
 	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src='js/bootstrap.js'></script>
 </head>
 <!-- recursos de design -->

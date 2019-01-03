@@ -3,13 +3,13 @@
     <div class="container-fluid">
         <?php include_once("headers/menu.php"); ?>
         <div class="col-md-7">
-            <div class="panel-active">
+            <div class="panel-active connectedSortable">
                 <h1> <i class="fas fa-clipboard-list"></i> <?=$msg->active_task_title?></h1>
                 <?php include_once("components/home/views/active_tasks.php"); ?>
             </div>
         </div>
         <div class="col-md-5">
-            <div class="panel-finished">
+            <div class="panel-finished connectedSortable">
                 <h1> <i class="fas fa-tasks"></i> <?=$msg->finished_task_title?> </h1>
                 <?php include_once("components/home/views/finished_tasks.php"); ?>
             </div>
@@ -44,6 +44,27 @@
 
 
     <?php include_once("headers/footer.php"); ?>
-    <script type="text/javascript" src="components/home/views/functions_task.js"></script>
+<script type="text/javascript" src="components/home/views/functions_task.js"></script>
+<script type="text/javascript">
+$( function() {
+    $( ".panel-active" ).sortable({
+        connectWith: ".connectedSortable",
+        receive:function(event, ui){
+            idTask = ui.item[0].childNodes[1].id;
+            idTask = idTask.substr(4, idTask.lenght);
+            restartTask(idTask);
+        }
+    }).disableSelection();
+    
+    $( ".panel-finished" ).sortable({
+        connectWith: ".connectedSortable",
+        receive:function(event, ui){
+            idTask = ui.item[0].childNodes[1].id;
+            idTask = idTask.substr(4, idTask.lenght);
+            finishTask(idTask);
+        }
+    }).disableSelection();
+});
+</script>
 </body>
 </html>
