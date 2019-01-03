@@ -97,7 +97,6 @@ class Task{
 			);
 			return false;
 		}
-
 		$this->condition = array( "id_status" => $this->id_status,
 			"id_user" => $this->id_user	);	
 		$tasks = $this->GetBy();
@@ -145,7 +144,6 @@ class Task{
 				'description' => "Nao setada", 'title' => "Nao setado ou vazio"	);
 			return false;
 		}
-		// teste
 		$this->id_status = 1; // this is Id from "ativo" on dataBase		
 		$this->data = array( "title" => $this->title, "description" => $this->description,
 			"id_status" => $this->id_status	); // data to update
@@ -170,7 +168,6 @@ class Task{
 			$lastError = "ID da task nao foi informado";
 			return false;
 		}
-
 		$this->finished_on = $this->getTodayDate();
 		$this->id_status = 2;
 		$this->data = array( "finished_on" => $this->finished_on, "id_status" => $this->id_status );
