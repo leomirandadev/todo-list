@@ -9,6 +9,9 @@ h1{
 h2,h3,h5{
 	font-weight: 200 !important;
 }
+h4{
+	margin-top: 5px !important;
+}
 /* end Default Tags */
 /*-----------------------------------------------------------------------------------*/
 /* start Bootstrap Tags and Classes*/
@@ -25,7 +28,9 @@ h2,h3,h5{
 .modal-body{
 	padding: 30px !important;
 }
-
+.btn-sm{
+	border-radius: 100% !important;
+}
 /* end Bootstrap Tags and Classes*/
 
 /* Start New classes */

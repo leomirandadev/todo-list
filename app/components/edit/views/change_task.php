@@ -5,9 +5,7 @@
 	  		<input type='text' required name='title' class='form-control' placeholder='Titulo' value="<?=$this->title?>"/>
 		</div>
 		<div class="col-md-12 form-group">
-			<textarea required name='description' class='form-control' placeholder="Descrição">
-				<?=$this->description?>
-			</textarea>
+			<textarea required name='description' class='form-control' placeholder="Descrição"><?=$this->description?></textarea>
 		</div>
 	</div>
 	
