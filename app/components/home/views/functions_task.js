@@ -1,4 +1,4 @@
-config = "";	$.getJSON('json/config.json', function(data){config = data;});
+config = ""; $.getJSON('json/config.json', function(data){config = data;});
 
 function removeTask(id){
 	$.confirm({
@@ -6,22 +6,7 @@ function removeTask(id){
 		content: msg.confirm_remove_task,
 		buttons: {
 			Sim: function () {
-				$.post(config.link_api + "/task/remove", {id:id}, function(data, status){
-						result = JSON.parse(data);
-						if (result.ok) {
-							window.location.reload();
-						}else{
-							$.alert({
-								title: 'Ops!',
-								content: msg.error_system,
-								buttons: {
-									ok: function(){
-										window.location.reload();
-									}
-								}
-							});
-						}
-				});
+				postTask("remove", id);
 	        },
 
 	        Cancelar: function () {
@@ -38,22 +23,7 @@ function finishTask(id){
 		content: msg.confirm_finish_task,
 		buttons: {
 			Sim: function () {
-				$.post(config.link_api + "/task/finish", {id:id}, function(data, status){
-						result = JSON.parse(data);
-						if (result.ok) {
-							window.location.reload();
-						}else{
-							$.alert({
-								title: 'Ops!',
-								content: msg.error_system,
-								buttons: {
-									ok: function(){
-										window.location.reload();
-									}
-								}
-							});
-						}
-				});
+				postTask("finish", id)
 	        },
 
 	        Cancelar: function () {
@@ -69,22 +39,7 @@ function restartTask(id){
 		content: msg.confirm_restart_task,
 		buttons: {
 			Sim: function () {
-				$.post(config.link_api + "/task/restart", {id:id}, function(data, status){
-						result = JSON.parse(data);
-						if (result.ok) {
-							window.location.reload();
-						}else{
-							$.alert({
-								title: 'Ops!',
-								content: msg.error_system,
-								buttons: {
-									ok: function(){
-										window.location.reload();
-									}
-								}
-							});
-						}
-				});
+				postTask("restart", id);
 	        },
 
 	        Cancelar: function () {
@@ -93,4 +48,23 @@ function restartTask(id){
 	    }
 	});
 
+}
+
+function postTask(route, id){
+	$.post(config.link_api + "/task/" + route, {id:id}, function(data, status){
+			result = JSON.parse(data);
+			if (result.ok) {
+				window.location.reload();
+			}else{
+				$.alert({
+					title: 'Ops!',
+					content: msg.error_system,
+					buttons: {
+						ok: function(){
+							window.location.reload();
+						}
+					}
+				});
+			}
+	});
 }
