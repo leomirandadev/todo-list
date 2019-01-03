@@ -5,15 +5,33 @@ if ( $this->active_tasks !== false ):
 ?>
 
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title">
-        <?=$task->title?> | 
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Detalhes
-        </a>
-      </h4>
+    <div class="panel-heading" role="tab" id="task<?=$task->id?>">
+      <div class="row">
+
+        <div class="col-sm-8">
+          <h4 class="panel-title">
+            <?=$task->title?> | 
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTask<?=$task->id?>" aria-expanded="false" aria-controls="collapseTask<?=$task->id?>">
+              Ver Detalhes <i class="fas fa-angle-down"></i>
+            </a>
+          </h4>
+        </div>
+
+        <div class="col-sm-4 right">
+          <button class="btn btn-sm btn-success">
+            <i class="fas fa-check"></i>
+          </button>
+          <button class="btn btn-sm btn-default">
+            <i class="fas fa-wrench"></i>
+          </button>
+          <button class="btn btn-sm btn-danger">
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </div>
+
+      </div>
     </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+    <div id="collapseTask<?=$task->id?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="task<?=$task->id?>">
       <div class="panel-body">
         <p>
           <?=$task->description?>

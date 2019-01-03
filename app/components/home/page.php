@@ -31,7 +31,7 @@
 					<h4 class="modal-title"><i class="fas fa-users"></i> <?=$msg->new_task_title?></h4>
 				</div>
 				<div class="modal-body">
-					
+                <?php include_once("components/home/views/new_task.php"); ?>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
