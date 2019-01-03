@@ -14,6 +14,7 @@ $app->post('/task/new', function (Request $request, Response $response, array $a
     // check if args are set
     if (
         !isset($args['title']) && empty($args['title']) &&
+        !isset($args['id_user']) && empty($args['id_user']) &&
         !isset($args['description'])
     ){
         return json_encode( array( "ok" => false, "error" => "Alguns campos nao foram fornecidos" ) );
@@ -22,6 +23,7 @@ $app->post('/task/new', function (Request $request, Response $response, array $a
     $task = new Task();
     // attr
     $task->title = $args['title'];
+    $task->id_user = $args['id_user'];
     $task->description = $args['description'];
     // try new
     $result = $task->new();
@@ -45,11 +47,20 @@ $app->get('/task/{id}', function (Request $request, Response $response, array $a
     return json_encode( array( "ok" => $result, "error" => $task->lastError ) );
 });
 
-$app->get('/task', function (Request $request, Response $response, array $args) {
-
+$app->get('/task/user/{id_user}/status/{id_status}', function (Request $request, Response $response, array $args) {
+    // check if args are set
+    if ( 
+        !isset($args['id_status']) && empty($args['id_status']) &&
+        !isset($args['id_user']) && empty($args['id_user'])
+    ) {
+        return json_encode( array( "ok" => false, "error" => "Alguns campos nao foram fornecidos" ) );
+    }
     $task = new Task();
+    // attr
+    $task->id_status = $args['id_status'];
+    $task->id_user = $args['id_user'];
     // try getAll
-	$result = $task->getAll();
+	$result = $task->getByStatus();
     
     return json_encode( array( "ok" => $result, "error" => $task->lastError ) );
 });

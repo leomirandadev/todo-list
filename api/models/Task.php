@@ -16,7 +16,7 @@ class Task{
 
 	use DataCenter;
 	
-	public $id;
+	public $id_user;
 	public $title;
 	public $description;
 	public $id_status;
@@ -48,6 +48,7 @@ class Task{
 	public function new() {
 		if(
 			!isset($this->title) && empty($this->title) &&
+			!isset($this->id_user) && empty($this->id_user) &&
 			!isset($this->description)
 		){
 			$lastError = array( 
@@ -60,6 +61,7 @@ class Task{
 		$this->data = array(
 			"title" => $this->title,
 			"description" => $this->description,
+			"id_user" => $this->id_user,
 			"id_status" => $this->id_status
 		);
 
@@ -83,13 +85,27 @@ class Task{
 	 *
 	 * @return void
 	 */
-	public function getAll() {
-		$this->condition = "all";
-			
-		$tasks = $this->GetBy();
-		if ( !$tasks ) return false;
-		
-		return $this->utf8_converter($tasks);
+	public function getByStatus() {
+		if ( 
+			!isset($this->id_status) && empty($this->id_status)&&
+			!isset($this->id_user) && empty($this->id_user)
+		) {
+			$lastError = array( 
+				'id_status' => "Não setado ou vazio",
+				'id_user' => "Não setado ou vazio"
+			);
+			return false;
+		}
+
+		$this->condition = array( 
+			"id_status" => $this->id_status,
+			"id_user" => $this->id_user
+		);
+				
+		$task = $this->GetBy();
+
+		if ( !$task ) return false;
+		return $this->utf8_converter( $task[0] );
 	}
 
 
