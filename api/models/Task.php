@@ -26,6 +26,11 @@ class Task{
 	// last error from functions
 	public $lastError = "";
 
+	function __construct() {
+		// set table from DataBase
+		$this->table = "task";
+	}
+
 //========================================================================================================
 //                                              GET TODAY DATE
 //========================================================================================================
@@ -52,8 +57,8 @@ class Task{
 			!isset($this->description)
 		){
 			$lastError = array( 
-				'description' => "Não setada" ,
-				'title' => "Não setado ou vazio" 
+				'description' => "Nao setada" ,
+				'title' => "Nao setado ou vazio" 
 			);
 			return false;
 		}
@@ -91,8 +96,8 @@ class Task{
 			!isset($this->id_user) && empty($this->id_user)
 		) {
 			$lastError = array( 
-				'id_status' => "Não setado ou vazio",
-				'id_user' => "Não setado ou vazio"
+				'id_status' => "Nao setado ou vazio",
+				'id_user' => "Nao setado ou vazio"
 			);
 			return false;
 		}
@@ -118,7 +123,7 @@ class Task{
 		if ( 
 			!isset($id) && empty($id)
 		) {
-			$lastError = "ID da task não foi informado";
+			$lastError = "ID da task nao foi informado";
 			return false;
 		}
 
@@ -148,9 +153,9 @@ class Task{
 			!isset($this->description)
 		){
 			$lastError = array( 
-				'id' => "Não setada ou vazia",
-				'description' => "Não setada" ,
-				'title' => "Não setado ou vazio" 
+				'id' => "Nao setada ou vazia",
+				'description' => "Nao setada" ,
+				'title' => "Nao setado ou vazio" 
 			);
 			return false;
 		}
@@ -182,7 +187,7 @@ class Task{
 		if ( 
 			!isset($id) && empty($id)
 		) {
-			$lastError = "ID da task não foi informado";
+			$lastError = "ID da task nao foi informado";
 			return false;
 		}
 
@@ -211,7 +216,7 @@ class Task{
 		if ( 
 			!isset($id) && empty($id)
 		) {
-			$lastError = "ID da task não foi informado";
+			$lastError = "ID da task nao foi informado";
 			return false;
 		}
 
@@ -237,7 +242,7 @@ class Task{
 	 */
 	public function remove($id) {
 		if ( !isset($id) && empty($id) ) {
-			$lastError = "ID da task não foi informado";
+			$lastError = "ID da task nao foi informado";
 			return false;
 		}
 
