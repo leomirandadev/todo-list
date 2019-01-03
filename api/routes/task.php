@@ -66,10 +66,10 @@ $app->get('/task/user/{id_user}/status/{id_status}', function (Request $request,
 });
 
 //========================================================================================================
-//                                              PUT
+//                                              POST / FOR UPDATES
 //========================================================================================================
 
-$app->put('/task/change', function (Request $request, Response $response, array $args) {
+$app->post('/task/change', function (Request $request, Response $response, array $args) {
     $args = $request->getParams();
     // check if args are set
     if (
@@ -90,7 +90,7 @@ $app->put('/task/change', function (Request $request, Response $response, array 
     return json_encode( array( "ok" => $result, "error" => $task->lastError ) );
 });
 
-$app->put('/task/finish', function (Request $request, Response $response, array $args) {
+$app->post('/task/finish', function (Request $request, Response $response, array $args) {
     $args = $request->getParams();
     // check if args are set
     if ( !isset($args['id']) && empty($args['id']) ){
@@ -104,7 +104,7 @@ $app->put('/task/finish', function (Request $request, Response $response, array 
     return json_encode( array( "ok" => $result, "error" => $task->lastError ) );
 });
 
-$app->put('/task/restart', function (Request $request, Response $response, array $args) {
+$app->post('/task/restart', function (Request $request, Response $response, array $args) {
     $args = $request->getParams();
     // check if args are set
     if ( !isset($args['id']) && empty($args['id'])){
@@ -118,7 +118,7 @@ $app->put('/task/restart', function (Request $request, Response $response, array
     return json_encode( array( "ok" => $result, "error" => $task->lastError ) );
 });
 
-$app->put('/task/remove', function (Request $request, Response $response, array $args) {
+$app->post('/task/remove', function (Request $request, Response $response, array $args) {
     $args = $request->getParams();
     // check if args are set
     if ( !isset($args['id']) && empty($args['id'])){
