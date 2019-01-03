@@ -14,13 +14,13 @@
             include_once("page.php");
         }
         private function active(){
-            $restAPI = new restClient("task", "user/1/status/1");
+            $restAPI = new restClient("task", "user/". $_SESSION['user'] ."/status/1");
             $result = json_decode( $restAPI->get() );
             $this->active_tasks = $result->ok ? $result->output : false;
         }
         
         private function finished(){
-            $restAPI = new restClient("task", "user/1/status/2");
+            $restAPI = new restClient("task", "user/". $_SESSION['user'] ."/status/2");
             $result = json_decode( $restAPI->get() );
             $this->finished_tasks = $result->ok ? $result->output : false;
         }

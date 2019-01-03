@@ -21,9 +21,9 @@ if ( $this->active_tasks !== false ):
           <button onclick="finishTask(<?=$task->id?>)" class="btn btn-sm btn-success">
             <i class="fas fa-check"></i>
           </button>
-          <button class="btn btn-sm btn-default">
+          <a href='edit&id=<?=$task->id?>' class="btn btn-sm btn-default">
             <i class="fas fa-wrench"></i>
-          </button>
+          </a>
           <button onclick="removeTask(<?=$task->id?>)" class="btn btn-sm btn-danger">
             <i class="far fa-trash-alt"></i>
           </button>
