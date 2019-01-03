@@ -1,3 +1,6 @@
 {
-  "error_login":" E-mail ou senha incorretos! Tente novamente."
+  "error_login":" E-mail ou senha incorretos! Tente novamente.",
+  "finished_task_title":"Tarefas Concluídas",
+  "active_task_title":"Tarefas ativas",
+  "new_task_title":"Cadastrar nova Tarefa"
 }

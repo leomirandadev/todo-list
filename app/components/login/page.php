@@ -2,7 +2,7 @@
 <body>
     <div class="container-fluid">
         <div class="col-md-4 col-xs-12 col-sm-offset-4 col-sm-4">
-            <div class="panel-edited">
+            <div class="panel-active">
                 <img src='<?=$config->urlLogo?>' class="img-responsive" >
                 <br>
                 <?php include_once("components/login/views/login_user.php"); ?>

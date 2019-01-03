@@ -9,20 +9,11 @@ h1{
 h2,h3,h5{
 	font-weight: 200 !important;
 }
-.right h2{
-	margin-top: 0;
-}
 /* end Default Tags */
 /*-----------------------------------------------------------------------------------*/
 /* start Bootstrap Tags and Classes*/
-.navbar{
-	border-radius: 0 !important;
-	border:0 !important;
-	box-shadow: 1px 0px 5px rgba(0,0,0,0.09);
-}
-.navbar-brand img{
-	height: 18px;
-	width: auto;
+.container-fluid{
+	margin-top: 20px;
 }
 .btn-primary{
 	background: #eb8545 !important;
@@ -36,14 +27,18 @@ h2,h3,h5{
 }
 
 /* end Bootstrap Tags and Classes*/
+
 /* Start New classes */
+.right{
+	text-align: right;
+}
 .forms-edit h3{
 	font-size:20px;
 	margin-bottom: 30px;
 	font-weight: 400;
 	color:#555555;
 }
-.panel-edited{
+.panel-active{
 	background: #FFFFFF;
 	border:1px solid #f7f7f7;
 	border-top:3px solid #eb8545;
@@ -52,12 +47,39 @@ h2,h3,h5{
 	padding:30px;
 	box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.09);
 	border-radius:2px;
+	height: 400px;
+	overflow-y: scroll;
 }
-.panel-edited h2 i{
+.panel-active h2 i{
 	color: #eb8545;
 }
+.panel-finished{
+	background: #FFFFFF;
+	border:1px solid #f7f7f7;
+	border-top:3px solid #bebebe;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding:30px;
+	box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.09);
+	border-radius:2px;
+	height: 400px;
+	overflow-y: scroll;
+}
+.panel-finished h2 i{
+	color: #bebebe;
+}
+.panel-default > .panel-heading{
+	background: #fff !important;
+	padding: 20px 30px;
+	border-radius: 0;
 
-/* end responsive resize */
+}
+.plus-task{
+	border-radius:100% !important;
+	padding: 20px 23px !important;
+}
+
+/* end New classes */
 /*-----------------------------------------------------------------------------------*/
 /* start LOADER*/
 .loader {
