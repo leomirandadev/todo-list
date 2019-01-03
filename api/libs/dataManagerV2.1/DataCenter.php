@@ -1,4 +1,14 @@
 <?php  
+
+/**
+ * DataCenter Trait Doc Comment
+ *
+ * @category Trait
+ * @package  DataCenter
+ * @author   Leonardo <leoamiranda2@gmail.com>
+ *
+ */
+
 namespace DataManager;
 use \PDO;
 
@@ -15,8 +25,13 @@ trait DataCenter{
 	public $orderBy = null;
 	public $errorDB = null;
 
+	
+	/**
+	 * Open
+	 *
+	 * @return void
+	 */
 	protected function Open(){
-
 		try{
 
 			$options= array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
@@ -28,18 +43,26 @@ trait DataCenter{
 			echo 'Connection failed: '.$e->getMessage();
 
 		}
-
 	}
 
-	protected function Close(){
 
+	/**
+	 * Close
+	 *
+	 * @return void
+	 */
+	protected function Close(){
 		$this->db = null;
 		return true;
-
 	}
 
-	protected function Insert(){
 
+	/**
+	 * Insert
+	 *
+	 * @return void
+	 */
+	protected function Insert(){
 		$this->Open();
 		$conector = $this->db;
 
@@ -78,8 +101,13 @@ trait DataCenter{
 		}
 	}
 
+	
+	/**
+	 * Update
+	 *
+	 * @return void
+	 */
 	protected function Update(){
-
 		$this->Open();
 		$conector = $this->db;
 
@@ -124,8 +152,14 @@ trait DataCenter{
 		return $this->TryCatch($sql,$conector);
 
 	}
-	protected function Delete(){
 
+	
+	/**
+	 * Delete
+	 *
+	 * @return void
+	 */
+	protected function Delete(){
 		$this->Open();
 		$conector = $this->db;
 
@@ -152,8 +186,13 @@ trait DataCenter{
 		return $this->TryCatch($sql,$conector);
 	}
 
+	
+	/**
+	 * GetBy
+	 *
+	 * @return void
+	 */
 	protected function GetBy(){
-
 		$this->Open();
 		$conector = $this->db;
 		
@@ -189,6 +228,13 @@ trait DataCenter{
 		return $this->Pesquisa($sql,$conector);
 
 	}
+
+	
+	/**
+	 * GetLike
+	 *
+	 * @return void
+	 */
 	protected function GetLike(){
 
 		$this->Open();
@@ -223,6 +269,16 @@ trait DataCenter{
 		return $this->Pesquisa($sql,$conector);
 
 	}
+
+
+	/**
+	 * Pesquisa
+	 *
+	 * @param  mixed $sql
+	 * @param  mixed $conector
+	 *
+	 * @return void
+	 */
 	protected function Pesquisa($sql,$conector){
 		$pesquisaSql = $conector->query($sql);
 		$rows = $pesquisaSql->rowCount();
@@ -238,6 +294,16 @@ trait DataCenter{
 
 		return $dados;
 	}
+
+	
+	/**
+	 * TryCatch
+	 *
+	 * @param  mixed $sql
+	 * @param  mixed $conector
+	 *
+	 * @return void
+	 */
 	protected function TryCatch($sql,$conector){
 		try{
 			$conector->exec($sql);
@@ -249,11 +315,20 @@ trait DataCenter{
 			return false;
 		}
 	}
+
+	
+	/**
+	 * isFloat
+	 *
+	 * @param  mixed $value
+	 *
+	 * @return void
+	 */
 	private function isFloat($value){
 		$pos = strpos($value, ",");
 		if($pos !== false){
 			$x = explode (",", $value);
-			if(!empty($x[0])&&is_numeric($x[0][-1])&&is_numeric($x[1][0])){
+			if( !empty($x[0]) && is_numeric($x[0][-1]) && is_numeric($x[1][0]) ){
 				return $value = $x[0].".".$x[1];
 			}
 		}

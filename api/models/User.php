@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * User Class Doc Comment
+ *
+ * @category Class
+ * @package  User
+ * @author   Leonardo <leoamiranda2@gmail.com>
+ *
+ */
+
 namespace Models;
 use DataManager\DataCenter;
 

@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * utf8Converter Trait Doc Comment
+ *
+ * @category Trait
+ * @package  utf8Converter
+ * @author   Leonardo <leoamiranda2@gmail.com>
+ *
+ */
+
 namespace utf8Converter;
 
 trait utf8Converter{
