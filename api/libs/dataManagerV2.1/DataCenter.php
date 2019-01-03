@@ -111,15 +111,7 @@ trait DataCenter{
 			$camps .= $camp."=\"$value\"";
 			$first = true;
 		}
-		//conditions of selection 
-		$first = false;
-		$conditions = null;
-		foreach ($this->condition as $camp => $value) {
-			if ($first) $conditions .= "AND";
-			
-			$first = true;
-			$conditions .= " $camp = \"$value\" ";
-		}
+		$conditions = $this->conditionForeachEqual();
 		$sql = "UPDATE $this->table SET $camps WHERE $conditions ";
 		//try to update
 		return $this->TryCatch($sql,$conector);
@@ -134,19 +126,36 @@ trait DataCenter{
 	protected function Delete(){
 		$this->Open();
 		$conector = $this->db;
-		//conditions for selection 
-		$first = false;
-		$conditions = null;
-		foreach ($this->condition as $camp => $value) {
-			if ($first) $conditions .= "AND";
-			$first = true;
-			$conditions .= " $camp = \"$value\" ";
-		}
+		$conditions = $this->conditionForeachEqual();
+
 		$sql = "DELETE FROM $this->table WHERE $conditions ";
 		//try to delete
 		return $this->TryCatch($sql,$conector);
 	}
 
+	private function conditionForeachEqual(){
+		$first = false;
+		$conditions = null;
+		
+		foreach ($this->condition as $camp => $value) {
+			if ($first) $conditions .= "AND";
+			$first = true;
+			$conditions .= " $this->table.$camp = \"$value\" ";
+		}
+		return $conditions;
+	}
+	
+	private function conditionForeachLike(){
+		$first = false;
+		$conditions = null;
+		
+		foreach ($this->condition as $camp => $value) {
+			if ($first) $conditions .= "AND";
+			$first = true;
+			$conditions .= " $this->table.$camp LIKE \"%$value%\" ";
+		}
+		return $conditions;
+	}
 	
 	/**
 	 * GetBy
@@ -160,14 +169,8 @@ trait DataCenter{
 		$anotherCamp = (isset($this->innerJoin)) ? $this->innerJoin['table'].".*," : "";
 		$orderBySelected = (!empty($this->orderBy)) ? $this->orderBy : $this->table.".id";
 		//conditions for selection 
-		$first = false;
-		$conditions = null;
 		if($this->condition!="all"){
-			foreach ($this->condition as $camp => $value) {
-				if ($first) $conditions .= "AND";
-				$first = true;
-				$conditions .= " $this->table.$camp = \"$value\" ";
-			}
+			$conditions = $this->conditionForeachEqual();
 			$sql = "SELECT $anotherCamp $this->table.* FROM $this->table $innerJoin WHERE $conditions ORDER BY $orderBySelected DESC";
 		}else{
 			$sql = "SELECT $anotherCamp $this->table.* FROM $this->table $innerJoin ORDER BY $orderBySelected DESC";
@@ -186,14 +189,8 @@ trait DataCenter{
 		$conector = $this->db;
 		$innerJoin = (isset($this->innerJoin)) ? "INNER JOIN ".$this->innerJoin['table']." ON $this->table.".$this->innerJoin["camps"][0]." = ".$this->innerJoin['table'].".".$this->innerJoin['camps'][1] : "";
 		//conditions for selection 
-		$first = false;
-		$conditions = null;
 		if($this->condition!="all"){
-			foreach ($this->condition as $camp => $value) {
-				if ($first)	$conditions .= "AND";
-				$first = true;
-				$conditions .= " $this->table.$camp LIKE \"%$value%\" ";
-			}
+			$conditions = $this->conditionForeachLike();
 			$sql = "SELECT * FROM $this->table $innerJoin WHERE $conditions ORDER BY $this->table.id DESC";
 		}else{
 			$sql = "SELECT * FROM $this->table $innerJoin ORDER BY $this->table.id DESC";
