@@ -1,7 +1,7 @@
 <?php
 	include_once(__DIR__."/vendor/autoload.php");
-	use components\login\controller as login,
-		components\home\controller as home;
+	use Components\login\controller as login,
+		Components\home\controller as home;
 	//get the url
 	$urlExtended = (isset($_GET['url'])) ? $_GET['url']:'';
 	$urlArray = explode("/", $urlExtended);
