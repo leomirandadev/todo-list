@@ -141,12 +141,11 @@ class Task{
 	public function change($id) {
 		if(!isset($id) && empty($id) && !isset($this->title)
 			&& empty($this->title) && !isset($this->description) ) {
-			
 			$lastError = array( 'id' => "Nao setada ou vazia",
 				'description' => "Nao setada", 'title' => "Nao setado ou vazio"	);
 			return false;
 		}
-		
+		// teste
 		$this->id_status = 1; // this is Id from "ativo" on dataBase		
 		$this->data = array( "title" => $this->title, "description" => $this->description,
 			"id_status" => $this->id_status	); // data to update

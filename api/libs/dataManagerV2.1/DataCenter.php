@@ -68,7 +68,6 @@ trait DataCenter{
 		$first = 0;
 		$values = null;
 		$camps = null;
-
 		//camps to create
 		foreach ($this->data as $camp => $value) {
 			if($first==1){
@@ -80,7 +79,6 @@ trait DataCenter{
 			$first=1;
 		}
 		$sql = "INSERT INTO $this->table ($camps) VALUES ($values)";
-
 		//try to insert
 		try{
 			$conector->exec($sql);
@@ -104,14 +102,12 @@ trait DataCenter{
 		$conector = $this->db;
 		$first = false;
 		$camps = null;
-
 		//camps to update
 		foreach ($this->data as $camp => $value) {
 			//para corrigir o erro de virgula e ponto transmitido pelo foreach
 			$valueFloated = $this->isFloat($value);
 			$value = !$valueFloated ? $value : $valueFloated ;
 			if ($first)	$camps.=",";
-	
 			$camps .= $camp."=\"$value\"";
 			$first = true;
 		}
@@ -141,10 +137,8 @@ trait DataCenter{
 		//conditions for selection 
 		$first = false;
 		$conditions = null;
-
 		foreach ($this->condition as $camp => $value) {
 			if ($first) $conditions .= "AND";
-
 			$first = true;
 			$conditions .= " $camp = \"$value\" ";
 		}
@@ -168,11 +162,9 @@ trait DataCenter{
 		//conditions for selection 
 		$first = false;
 		$conditions = null;
-
 		if($this->condition!="all"){
 			foreach ($this->condition as $camp => $value) {
 				if ($first) $conditions .= "AND";
-
 				$first = true;
 				$conditions .= " $this->table.$camp = \"$value\" ";
 			}
@@ -196,11 +188,9 @@ trait DataCenter{
 		//conditions for selection 
 		$first = false;
 		$conditions = null;
-
 		if($this->condition!="all"){
 			foreach ($this->condition as $camp => $value) {
 				if ($first)	$conditions .= "AND";
-
 				$first = true;
 				$conditions .= " $this->table.$camp LIKE \"%$value%\" ";
 			}
@@ -209,7 +199,6 @@ trait DataCenter{
 			$sql = "SELECT * FROM $this->table $innerJoin ORDER BY $this->table.id DESC";
 		}
 		return $this->Pesquisa($sql,$conector);
-
 	}
 
 
