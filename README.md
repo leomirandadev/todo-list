@@ -6,9 +6,9 @@ O projeto consiste no desenvolvimento de um software que permite o usuário cada
 
 Baixe o projeto em sua máquina e siga as instruções abaixo:
 
-1 - instale o Banco de dados que está na pasta doc
-2 - Acesse o arquivo /app/json/config.json e altere o link da api para onde seu projeto ficará
-3 - Acesse o arquivo /api/libs/dataManagerV2.1/DataCenter.php e altere
+- instale o Banco de dados que está na pasta doc
+- Acesse o arquivo /app/json/config.json e altere o link da api para onde seu projeto ficará
+- Acesse o arquivo /api/libs/dataManagerV2.1/DataCenter.php e altere
 
 ```
 private $dsn = "mysql:dbname=nome_do_banco; host=seu_host";
@@ -17,7 +17,7 @@ private $pass = 'seu_senha';
 
 ```
 
-## O usuário conselhe:
+## O usuário consegue:
 
 - Adicionar novas tarefas;
 - Marcar e desmarcar o status de concluído;
